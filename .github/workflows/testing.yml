@@ -1,0 +1,17 @@
+name: Go Test
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [$default-branch]
+  pull_request:
+    branches: [$default-branch]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+        with:
+          go-version: 1.15
+      - name: Testing
+        run: make test
