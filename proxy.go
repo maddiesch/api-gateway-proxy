@@ -156,6 +156,11 @@ func (w *writer) response() (events.APIGatewayV2HTTPResponse, error) {
 	res := events.APIGatewayV2HTTPResponse{
 		StatusCode:        w.status,
 		MultiValueHeaders: w.headers,
+		Headers:           make(map[string]string),
+	}
+
+	for k, v := range w.headers {
+		res.Headers[k] = strings.Join(v, ",")
 	}
 
 	bodyBytes := w.body.Bytes()
